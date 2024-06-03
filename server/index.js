@@ -27,8 +27,6 @@ async function handleMatch(player1, player2) {
     const username1 = await getUsernameFromUUID(player1);
     const username2 = await getUsernameFromUUID(player2);
 
-
-
     // Example: Store match details in a map
     const matchId = uuid.v4();
     // actions[] examples: 
@@ -196,7 +194,7 @@ wss.on('connection', (ws, req) => {
                             matchObject.actions.push({ type: "round_draw" });
 
                             clients.get(matchObject.player1.uuid).websocket.send(JSON.stringify({ type: 'round_draw', data:"both players used " + matchObject.player1.selectedMove }));
-                            clients.get(matchObject.player2.uuid).websocket.send(JSON.stringify({ type: 'round_draw' }));
+                            clients.get(matchObject.player2.uuid).websocket.send(JSON.stringify({ type: 'round_draw', data:"both players used " + matchObject.player1.selectedMove }));
 
                             matchObject.player1.selectedMove = null;
                             matchObject.player2.selectedMove = null;
